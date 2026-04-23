@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-playfair: "Playfair Display", serif;
+  
+  --color-editorial-bg: #0a0a0a;
+  --color-editorial-ink: #ffffff;
+  --color-editorial-accent: #e2e2e2;
+}
+
+@layer base {
+  body {
+    @apply bg-editorial-bg text-editorial-ink font-inter antialiased;
+  }
+}
+
+.editorial-meta {
+  @apply text-[11px] uppercase tracking-[0.2em] opacity-60 leading-relaxed;
+}
+
+.editorial-title {
+  @apply font-playfair text-[72px] leading-[0.9] font-bold -tracking-[2px];
+}
+
+.editorial-subtitle {
+  @apply font-playfair italic text-2xl opacity-50 mt-5 block;
+}
