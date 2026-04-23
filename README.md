@@ -1,20 +1,9 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Kleingarten Parzelle 55 – Vorher / Nachher & aktuelle Situation
 
-# Run and deploy your AI Studio app
+This project documents the transformation and current situation of Kleingartenparzelle Nr. 55.
 
-This contains everything you need to run your app locally.
+Vor einem Jahr war die Parzelle unzugänglich und stark verwildert. Heute ist sie vollständig aufgeräumt und wieder nutzbar: Knoblauch wächst, ein Apfelbaum steht auf dem Gelände, der Birnenbaum wurde gepflegt, die Wasserpumpe funktioniert und die Hecken wurden entfernt.
 
-View your app in AI Studio: https://ai.studio/apps/fda158be-2de4-4ab8-bca2-a2607a205840
+Für Mai ist geplant, weiteres Gemüse anzupflanzen und die Bewirtschaftung weiter auszubauen.
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Trotz dieser Verbesserungen wurde von einem Gemeindemitarbeiter mitgeteilt, dass der Zustand als nicht ausreichend bewertet wird und es wurde eine mögliche Kündigung angedroht.
