@@ -1,13 +1,108 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleingarten Drama</title>
+    <!-- Tailwind CSS (Direct CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- React & Babel for Browser -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        .editorial-title { font-family: 'Playfair Display', serif; font-size: 72px; line-height: 0.9; font-weight: 700; letter-spacing: -2px; text-transform: uppercase; }
+        .editorial-meta { font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.6; }
+        .editorial-subtitle { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; opacity: 0.5; margin-top: 20px; display: block; }
+    </style>
+</head>
+<body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
 
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+
+        const ImageSlider = ({ beforeImage, afterImage }) => {
+            const [sliderPosition, setSliderPosition] = useState(50);
+            const containerRef = useRef(null);
+
+            const handleMove = (clientX) => {
+                if (!containerRef.current) return;
+                const rect = containerRef.current.getBoundingClientRect();
+                const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+                const percent = (x / rect.width) * 100;
+                setSliderPosition(percent);
+            };
+
+            return (
+                <div 
+                    ref={containerRef}
+                    className="relative w-full aspect-[4/5] bg-[#1a1a1a] border border-white/10 overflow-hidden cursor-col-resize group"
+                    onMouseMove={(e) => handleMove(e.clientX)}
+                    onTouchMove={(e) => e.touches[0] && handleMove(e.touches[0].clientX)}
+                >
+                    <img src={beforeImage} className="absolute inset-0 w-full h-full object-cover select-none" />
+                    <div className="absolute inset-0 w-full h-full overflow-hidden select-none pointer-events-none z-10" style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}>
+                        <img src={afterImage} className="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div className="absolute top-0 bottom-0 z-20 pointer-events-none" style={{ left: `${sliderPosition}%` }}>
+                        <div className="absolute top-0 bottom-0 w-[1px] bg-white/80" />
+                        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full border border-white flex items-center justify-center gap-1">
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                            <div className="w-1 h-1 bg-white rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            return (
+                <div className="min-h-screen flex items-center justify-center p-4 md:p-10">
+                    <div className="w-full max-w-[1024px] grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10 items-stretch relative">
+                        <header className="flex flex-col justify-between border-b md:border-b-0 md:border-r border-white/10 pb-10 md:pb-0 md:pr-10">
+                            <div>
+                                <span className="editorial-meta block mb-10">Do. 23 // April</span>
+                                <h1 className="editorial-title">Kleingarten<br/>Drama</h1>
+                                <span className="editorial-subtitle">Damals unzugänglich, heute gepflegt – warum droht mir jetzt die Kündigung?</span>
+                                <div className="mt-10 max-w-[580px]">
+                                    <p className="text-[13px] opacity-70 leading-relaxed"><i>Ungepflegter Zustand der Kleingartenparzelle Nr. 55 <br/><br/>Sehr geehrte Frau xxx,<br/>sehr geehrter Herr xxx, <br/>bei einer Besichtigung der Kleingartenanlage „Im Neubruch" beim Waldstadion, die in den letzten Tagen stattgefunden hat, mussten wir feststellen, dass sich die von ihnen gepachtete Kleingartenparzelle Nr. 55 in einem sehr ungepflegten Zustand befindet. <br/><br/>Wir fordern Sie hiermit auf, die Parzelle bis zum 18.05.2026 in einen ordentlichen Zustand zu versetzen (z.B. Gras mähen usw.). <br/><br/>Sollte sich der Zustand der Parzelle bis zum 18.05.2026 nicht verbessern, sehen wir uns gezwungen, weitere Schritte einzuleiten, die bis hin zur Kündigung des Pachtverhältnisses führen können. <br/><br/>Sofern Sie kein Interesse mehr an der Bewirtschaftung des Kleingartens haben, können Sie sich gerne mit Herrn xxx von der Gemeindeverwaltung, Zimmer 6b, Tel.: xxx-xxx-xxx, E-Mail: xxx.xxx@schutterwald.de in Verbindung setzen, damit ein neuer Pächter gesucht werden kann. <br/>Mit freundlichen Grüßen</i></p>
+                                </div>
+                            </div>
+                            <div className="pt-10 opacity-60">
+                                <p className="editorial-meta leading-loose">Project: Kleingartenparzelle Nr. 55<br/>Date: April 2026</p>
+                            </div>
+                        </header>
+
+                        <main className="relative flex flex-col justify-center">
+                            <div className="mt-12 md:mt-0">
+                                <ImageSlider 
+                                    beforeImage="before.png" 
+                                    afterImage="after.png" 
+                                />
+                            </div>
+                            <div className="mt-6 flex justify-between items-start">
+                                <div className="space-y-4 max-w-[480px]">
+                                    <p className="text-[11px] opacity-40 italic uppercase tracking-wider">vorher / nachher</p>
+                                    <p className="text-[11px] opacity-40">* Vorher war die Kleingartenparzelle 55 unzugänglich und völlig verwildert.Heute wächst dort Knoblauch, ein Apfelbaum steht, der Birnenbaum wurde gepflegt, die Wasserpumpe funktioniert und die Hecken sind entfernt. Im Mai ist geplant, weiteres Gemüse anzupflanzen. Trotzdem sagt ein Gemeindemitarbeiter: nicht genug – und droht mit Kündigung.</p>
+                                </div>
+                                <div className="font-playfair italic text-[80px] opacity-10 leading-none select-none">55</div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
